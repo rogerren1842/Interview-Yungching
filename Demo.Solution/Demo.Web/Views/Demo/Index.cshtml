@@ -1,0 +1,124 @@
+﻿@model Demo.Model.Model.Entity.DemoTable
+
+<h2>CURD展示功能</h2>
+<hr />
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Id, new { @class = "col-md-2 control-label" })
+    <input class="form-control" id="Id" type="text" value="1">
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+    <input class="form-control" id="Name" type="text">
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+    <input class="form-control" id="Gender" type="text">
+</div>
+
+<div class="form-group">
+    <label class="col-md-2"></label>
+    <a class="btn btn-primary" onclick="Create()">C(新增)</a>
+    <a class="btn btn-info" onclick="Update()">U(更新)</a>
+    <a class="btn btn-success" onclick="Read()">R(查詢)</a>    
+    <a class="btn btn-warning" onclick="Delete()">D(刪除)</a>
+</div>
+
+<div class="form-group">
+    <label id="Result">執行結果：<font id="ExecuteResult" color="red"></font></label>
+</div>
+
+<div class="form-group">
+    <label>查詢結果：<font id="ReadResult" color="blue"></font></label>
+</div>
+
+<script>
+
+    //新增功能
+    function Create() {
+        if (validator()) {
+            SendBackEnd(
+                "../Demo/Create",
+                GetFormData(),
+                function (result) {
+                    $("#ExecuteResult").html(result.ExecuteResult);
+                    $("#ReadResult").html(result.QueryResult);
+                }
+            );
+        }
+    }
+
+    //查詢功能
+    function Read() {
+        if (validator()) {
+            SendBackEnd(
+                "../Demo/Read",
+                GetFormData(),
+                function (result) {
+                    $("#ExecuteResult").html(result.ExecuteResult);
+                    $("#ReadResult").html(result.QueryResult);
+                }
+            );
+        }
+    }
+
+    //更新功能
+    function Update() {
+        if (validator()) {
+            SendBackEnd(
+                "../Demo/Update",
+                GetFormData(),
+                function (result) {
+                    $("#ExecuteResult").html(result.ExecuteResult);
+                    $("#ReadResult").html(result.QueryResult);
+                }
+            );
+        }
+    }
+
+    //刪除功能
+    function Delete() {
+        if (validator()) {
+            SendBackEnd(
+                "../Demo/Delete",
+                GetFormData(),
+                function (result) {
+                    $("#ExecuteResult").html(result.ExecuteResult);
+                    $("#ReadResult").html(result.QueryResult);
+                }
+            );
+        }
+    }
+
+    //ID檢核
+    function validator() {
+        if ($("#Id").val() == "") {
+            alert("請填入編號!")
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    //得到當前資料
+    function GetFormData() {
+        return {
+            Id: $("#Id").val(),
+            Name: $("#Name").val(),
+            Gender: $("#Gender").val()
+        };
+    }
+
+    //送出後端要求
+    function SendBackEnd(Url, Data, Callback) {
+        $.ajax({
+            type: "POST",
+            url: Url,
+            data: Data,
+            success: Callback,
+            dataType: "json"
+        });
+    }
+
+</script>
