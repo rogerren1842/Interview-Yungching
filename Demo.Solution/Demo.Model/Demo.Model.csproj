@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Demo.Model</RootNamespace>
     <AssemblyName>Demo.Model</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao\DemoTableDao.cs" />
     <Compile Include="Model\Entity\DemoTable.cs" />
     <Compile Include="Model\View\ResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,14 +55,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dao\" />
     <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demo.Tool\Demo.Tool.csproj">
-      <Project>{bc11a66a-fd69-4a98-9c89-7ade00ccef5c}</Project>
+      <Project>{77f87cfb-e41e-4898-993e-c4a04d238315}</Project>
       <Name>Demo.Tool</Name>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

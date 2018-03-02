@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 
-namespace CRUD.Tool
+namespace Demo.Tool
 {
     /// <summary>
     /// Config取得工具
