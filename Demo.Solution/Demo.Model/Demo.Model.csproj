@@ -11,6 +11,7 @@
     <AssemblyName>Demo.Model</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +36,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Entity\DemoTable.cs" />
+    <Compile Include="Model\View\ResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -51,9 +55,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dao\" />
-    <Folder Include="Model\Entity\" />
-    <Folder Include="Model\View\" />
     <Folder Include="Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Demo.Tool\Demo.Tool.csproj">
+      <Project>{bc11a66a-fd69-4a98-9c89-7ade00ccef5c}</Project>
+      <Name>Demo.Tool</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
