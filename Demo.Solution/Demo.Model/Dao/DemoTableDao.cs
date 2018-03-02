@@ -17,19 +17,16 @@ namespace Demo.Model.Dao
         /// </summary>
         public void Create(DemoTable Data)
         {
-            var sql = @"INSERT INTO DemoDB Values(@Id,@Name,@Gender)";
-
-            var parameters = new DynamicParameters();
-            parameters.Add("@Id", Data.Id);
-            parameters.Add("@Name", Data.Name);
-            parameters.Add("@Gender", Data.Gender);
+            var sql = @"INSERT INTO DemoTable Values(@Id,@Name,@Gender)";
 
             using (var connection = new SqlConnection(ConfigTool.GetDbConnectionStrings()))
             {
+                connection.Open();
+
                 var transaction = connection.BeginTransaction();
                 try
                 {
-                    connection.Execute(sql, parameters);
+                    connection.Execute(sql, Data, transaction);
                     transaction.Commit();
                 }
                 catch (Exception ex)
@@ -46,21 +43,19 @@ namespace Demo.Model.Dao
         public void Update(DemoTable Data)
         {
             var sql = @"
-                UPDATE DemoDB 
+                UPDATE DemoTable 
                 SET Id=@Id,Name=@Name,Gender=@Gender
                 WHERE Id=@Id";
 
-            var parameters = new DynamicParameters();
-            parameters.Add("@Id", Data.Id);
-            parameters.Add("@Name", Data.Name);
-            parameters.Add("@Gender", Data.Gender);
-
             using (var connection = new SqlConnection(ConfigTool.GetDbConnectionStrings()))
             {
+                connection.Open();
+
                 var transaction = connection.BeginTransaction();
                 try
                 {
-                    connection.Execute(sql, parameters);
+                    connection.Execute(sql, Data, transaction);
+                    transaction.Commit();
                 }
                 catch (Exception ex)
                 {
@@ -77,14 +72,11 @@ namespace Demo.Model.Dao
         {
             var sql = @"SELECT * FROM DemoTable(NOLOCK) WHERE Id=@Id";
 
-            var parameters = new DynamicParameters();
-            parameters.Add("@Id", Data.Id);
-
             using (var connection = new SqlConnection(ConfigTool.GetDbConnectionStrings()))
             {
                 try
                 {
-                    var result = connection.Query<DemoTable>(sql, parameters).ToList();
+                    var result = connection.Query<DemoTable>(sql, Data).ToList();
                     return result.Count > 0 ? result.First() : null;
                 }
                 catch (Exception ex)
@@ -101,15 +93,15 @@ namespace Demo.Model.Dao
         {
             var sql = @"DELETE FROM DemoTable WHERE Id=@Id";
 
-            var parameters = new DynamicParameters();
-            parameters.Add("@Id", Data.Id);
-
             using (var connection = new SqlConnection(ConfigTool.GetDbConnectionStrings()))
             {
+                connection.Open();
+
                 var transaction = connection.BeginTransaction();
                 try
                 {
-                    connection.Execute(sql, parameters);
+                    connection.Execute(sql, Data, transaction);
+                    transaction.Commit();
                 }
                 catch (Exception ex)
                 {
