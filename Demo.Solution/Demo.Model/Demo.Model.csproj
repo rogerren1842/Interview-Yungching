@@ -50,13 +50,12 @@
     <Compile Include="Model\Entity\DemoTable.cs" />
     <Compile Include="Model\View\ResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\DemoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Service\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Demo.Tool\Demo.Tool.csproj">
       <Project>{77f87cfb-e41e-4898-993e-c4a04d238315}</Project>
