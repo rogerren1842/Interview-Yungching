@@ -15,7 +15,7 @@ namespace Demo.Model.Model.Entity
         /// <summary>
         /// ID
         /// </summary>
-        [Display(Name = "ID")]
+        [Display(Name = "編號")]
         public string Id { set; get; }
 
         /// <summary>
